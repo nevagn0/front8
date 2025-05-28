@@ -1,0 +1,14 @@
+{
+  "name": "smart-todo-pwa",
+  "version": "1.0.0",
+  "description": "PWA приложение для управления задачами с push-уведомлениями",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.1",
+    "web-push": "^3.6.7"
+  }
+} 

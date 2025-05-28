@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный список задач</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="theme-color" content="#2196F3">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Умный список задач</h1>
+            <button id="notification-button" class="notification-button">
+                Включить уведомления
+            </button>
+        </header>
+
+        <div class="todo-form">
+            <input type="text" id="todo-input" placeholder="Добавить новую задачу...">
+            <button id="add-todo">Добавить</button>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Все</button>
+            <button class="filter-btn" data-filter="active">Активные</button>
+            <button class="filter-btn" data-filter="completed">Выполненные</button>
+        </div>
+
+        <div id="todo-list" class="todo-list">
+            <!-- Задачи будут добавляться здесь динамически -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker registered');
+                    return registration.pushManager.getSubscription();
+                })
+                .then(subscription => {
+                    if (subscription) {
+                        document.getElementById('notification-button').textContent = 'Отключить уведомления';
+                    }
+                })
+                .catch(err => console.log('ServiceWorker registration failed:', err));
+        }
+    </script>
+</body>
+</html> 
